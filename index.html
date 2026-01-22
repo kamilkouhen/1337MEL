@@ -103,15 +103,75 @@
         }
 
         .section {
-            margin-bottom: 3rem;
+            margin-bottom: 2rem;
+            border-bottom: 1px solid #eee;
+            padding-bottom: 1rem;
         }
 
+        /* Styles for the Accordion functionality */
+        .accordion-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            cursor: pointer;
+            transition: color 0.3s ease;
+        }
+
+        .accordion-header:hover h3 {
+            color: #8fc76d;
+        }
+
+        .accordion-header::after {
+            content: '+';
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: #a3de83;
+            margin-left: 1rem;
+        }
+
+        .section.active .accordion-header::after {
+            content: '-';
+        }
+
+        .accordion-content {
+            display: none; /* Hidden by default */
+            margin-top: 1.5rem;
+            animation: fadeIn 0.4s ease;
+        }
+
+        .section.active .accordion-content {
+            display: block;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(-10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* Specific styles for headers */
         .section h3 {
-            font-size: 1.8rem;
+            font-size: 1.6rem;
             color: #111;
-            margin-bottom: 1rem;
+            margin-bottom: 0;
             padding-bottom: 0.5rem;
-            border-bottom: 3px solid #a3de83;
+            /* Removed border bottom from h3 as it is now on the section container */
+        }
+
+        /* Exception for the TLDR box/section which shouldn't be an accordion */
+        .section.static-section {
+            border-bottom: none;
+        }
+        
+        .section.static-section .accordion-content {
+            display: block;
+        }
+
+        .section.static-section .accordion-header {
+            cursor: default;
+        }
+        
+        .section.static-section .accordion-header::after {
+            content: none; 
         }
 
         .section h4 {
@@ -147,7 +207,7 @@
             background: #fff9e6;
             border: 3px solid #a3de83;
             padding: 2rem;
-            margin: 2rem 0;
+            margin: 0; /* Reset margin for fit */
             border-radius: 0.5rem;
             box-shadow: 0 0.5rem 1.5rem rgba(163, 222, 131, 0.2);
         }
@@ -284,9 +344,9 @@
         </div>
 
         <div class="content">
-            <div class="section">
+            <div class="section static-section">
                 <div class="tldr-box">
-                    <h3 style="margin-top: 0;">⚡ What you need to know right now:</h3>
+                    <h3 style="margin-top: 0;">What you need to know right now:</h3>
                     <ul style="margin-left: 0; list-style: none;">
                         <li>✓ You're being asked to join a research study about coding education</li>
                         <li>✓ Participation is <strong>completely voluntary</strong></li>
@@ -296,99 +356,121 @@
                         <li>✓ <strong>Important:</strong> Admission uses a randomized selection (experimental procedure)</li>
                     </ul>
                     <p style="margin-top: 1.5rem; font-size: 1.1rem; font-weight: 600; color: #111;">
-                        👇 Scroll down to read the full details, then decide at the bottom of the page.
+                        Scroll down to read the full details, then decide at the bottom of the page.
                     </p>
                 </div>
             </div>
 
             <div class="section">
-                <h3>You are part of something bigger.</h3>
-                <p>Whether you are diving into the pool or pursuing other paths, your journey is unique. We invite you to join a groundbreaking study led by researchers from MIT, Harvard University, PSE, and UM6P to understand the real-world impact of coding schools on Moroccan Youth.</p>
-                <p>We are not just studying code; we are studying opportunity. By agreeing to participate, you help us understand how to build better educational systems for everyone in Morocco.</p>
-            </div>
-
-            <div class="section">
-                <h3>What does participation mean?</h3>
-                <p>By clicking "I Agree," you join a select cohort of Moroccan youth whose career paths will inform future education policy.</p>
-                
-                <div class="highlight-box">
-                    <p><strong>This study involves research using an experimental admission procedure.</strong> As part of this research, admission decisions to 1337 are made using a randomized selection process rather than traditional admissions criteria. This experimental procedure allows us to rigorously evaluate the impact of the program.</p>
+                <div class="accordion-header">
+                    <h3>You are part of something bigger.</h3>
                 </div>
-
-                <h4>Specifically, you agree to:</h4>
-                <ul>
-                    <li><strong>Share your application data:</strong> We will analyze the demographic and test data you have already provided to understand who is applying to 1337.</li>
-                    <li><strong>Let us follow your journey:</strong> We want to understand the full picture of your life and career over the next few years. We will contact you periodically to complete surveys about your employment, skills, earnings, and well-being.</li>
-                    <li><strong>Contribute to in-depth research:</strong> While some check-ins may be brief, other surveys may be longer and more detailed to help us deeply understand the challenges and successes you face in education and the labor market. Your thorough answers are vital to the study's success.</li>
-                </ul>
-
-                <p><strong>Expected Duration:</strong> This study will follow participants for approximately 3-5 years, with surveys conducted every 6 months. Each survey will take approximately 5-30 minutes to complete.</p>
-                <p><strong>Number of Participants:</strong> Approximately 800-1,200 Moroccan youth will participate in this study across all research sites.</p>
-            </div>
-
-            <div class="section">
-                <h3>Your Safety and Privacy (MIT Standards)</h3>
-                <ul>
-                    <li><strong>Strictly Confidential:</strong> Your data will be "de-identified." We remove your name, phone number, and email before any analysis. Researchers at MIT or Harvard will see only numbers and trends, not "You."</li>
-                    <li><strong>Secure:</strong> All data is stored on encrypted, secure servers following strict US and International data protection laws.</li>
-                    <li><strong>Future Impact:</strong> De-identified data may be shared with the broader scientific community to help other researchers understand youth employment, but your identity will never be attached to it. If you do not want your de-identified data used for future research, please contact the research team.</li>
-                </ul>
-            </div>
-
-            <div class="section">
-                <h3>Important: Your Status is Safe</h3>
-                <p><strong>This is completely voluntary.</strong></p>
-                <ul>
-                    <li><strong>If you were admitted:</strong> Refusing this study will not affect your spot in the pool.</li>
-                    <li><strong>If you were not admitted:</strong> Joining this study does not change the admission decision, but it ensures your experience counts in our national evaluation.</li>
-                    <li><strong>You can withdraw your consent at any time without any penalty.</strong></li>
-                </ul>
-
-                <div class="highlight-box">
-                    <p><strong>How to Withdraw:</strong> You may withdraw at any time by contacting [Insert Email]. If you withdraw, no new data will be collected, but data already collected may continue to be used in the research unless you specifically request its removal.</p>
+                <div class="accordion-content">
+                    <p>Whether you are diving into the pool or pursuing other paths, your journey is unique. We invite you to join a groundbreaking study led by researchers from MIT, Harvard University, PSE, and UM6P to understand the real-world impact of coding schools on Moroccan Youth.</p>
+                    <p>We are not just studying code; we are studying opportunity. By agreeing to participate, you help us understand how to build better educational systems for everyone in Morocco.</p>
                 </div>
             </div>
 
             <div class="section">
-                <h3>Risks and Benefits</h3>
-                
-                <h4>Risks:</h4>
-                <ul>
-                    <li><strong>Minimal Risk:</strong> This research involves minimal risk. The main risk is a potential breach of privacy, which we minimize with strict security measures.</li>
-                    <li><strong>Time Commitment:</strong> Some surveys may require a time commitment of 5-30 minutes every 6 months.</li>
-                    <li><strong>Unforeseeable Risks:</strong> While we do not anticipate additional risks, some risks related to data privacy may be currently unforeseeable.</li>
-                    <li><strong>No Compensation for Injury:</strong> This research involves minimal risk and no compensation for injury is provided.</li>
-                </ul>
+                <div class="accordion-header">
+                    <h3>What does participation mean?</h3>
+                </div>
+                <div class="accordion-content">
+                    <p>By clicking "I Agree," you join a select cohort of Moroccan youth whose career paths will inform future education policy.</p>
+                    
+                    <div class="highlight-box">
+                        <p><strong>This study involves research using an experimental admission procedure.</strong> As part of this research, admission decisions to 1337 are made using a randomized selection process rather than traditional admissions criteria. This experimental procedure allows us to rigorously evaluate the impact of the program.</p>
+                    </div>
 
-                <h4>Benefits:</h4>
-                <ul>
-                    <li><strong>No Direct Benefits:</strong> You will not receive money or direct benefits.</li>
-                    <li><strong>Broader Impact:</strong> However, your participation provides critical data that could improve education policy for thousands of young Moroccans.</li>
-                </ul>
+                    <h4>Specifically, you agree to:</h4>
+                    <ul>
+                        <li><strong>Share your application data:</strong> We will analyze the demographic and test data you have already provided to understand who is applying to 1337.</li>
+                        <li><strong>Let us follow your journey:</strong> We want to understand the full picture of your life and career over the next few years. We will contact you periodically to complete surveys about your employment, skills, earnings, and well-being.</li>
+                        <li><strong>Contribute to in-depth research:</strong> While some check-ins may be brief, other surveys may be longer and more detailed to help us deeply understand the challenges and successes you face in education and the labor market. Your thorough answers are vital to the study's success.</li>
+                    </ul>
 
-                <p><strong>No Additional Costs:</strong> Participation involves no financial costs beyond the time required to complete surveys.</p>
-                
-                <div class="highlight-box">
-                    <p><strong>New Information:</strong> If we discover significant new findings during the study that might affect your willingness to participate, we will inform you promptly.</p>
+                    <p><strong>Expected Duration:</strong> This study will follow participants for approximately 3-5 years, with surveys conducted every 6 months. Each survey will take approximately 5-30 minutes to complete.</p>
                 </div>
             </div>
 
             <div class="section">
-                <h3>Questions?</h3>
-                <p><strong>About the study:</strong> Contact the research team at [Insert Email/Phone].</p>
-                <p><strong>About your rights:</strong> Contact the MIT Committee on the Use of Humans as Experimental Subjects at couhes@mit.edu or 1-617-253-6787.</p>
+                <div class="accordion-header">
+                    <h3>Your Safety and Privacy (MIT Standards)</h3>
+                </div>
+                <div class="accordion-content">
+                    <ul>
+                        <li><strong>Strictly Confidential:</strong> Your data will be "de-identified." We remove your name, phone number, and email before any analysis. Researchers at MIT or Harvard will see only numbers and trends, not "You."</li>
+                        <li><strong>Secure:</strong> All data is stored on encrypted, secure servers following strict US and International data protection laws.</li>
+                        <li><strong>Future Impact:</strong> De-identified data may be shared with the broader scientific community to help other researchers understand youth employment, but your identity will never be attached to it. If you do not want your de-identified data used for future research, please contact the research team.</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="section">
+                <div class="accordion-header">
+                    <h3>Important: Your Status is Safe</h3>
+                </div>
+                <div class="accordion-content">
+                    <p><strong>This is completely voluntary.</strong></p>
+                    <ul>
+                        <li><strong>If you were admitted:</strong> Refusing this study will not affect your spot in the pool.</li>
+                        <li><strong>If you were not admitted:</strong> Joining this study does not change the admission decision, but it ensures your experience counts in our national evaluation.</li>
+                        <li><strong>You can withdraw your consent at any time without any penalty.</strong></li>
+                    </ul>
+
+                    <div class="highlight-box">
+                        <p><strong>How to Withdraw:</strong> You may withdraw at any time by contacting [Insert Email]. If you withdraw, no new data will be collected, but data already collected may continue to be used in the research unless you specifically request its removal.</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="section">
+                <div class="accordion-header">
+                    <h3>Risks and Benefits</h3>
+                </div>
+                <div class="accordion-content">
+                    <h4>Risks:</h4>
+                    <ul>
+                        <li><strong>Minimal Risk:</strong> This research involves minimal risk. The main risk is a potential breach of privacy, which we minimize with strict security measures.</li>
+                        <li><strong>Time Commitment:</strong> Some surveys may require a time commitment of 5-30 minutes every 6 months.</li>
+                        <li><strong>Unforeseeable Risks:</strong> While we do not anticipate additional risks, some risks related to data privacy may be currently unforeseeable.</li>
+                        <li><strong>No Compensation for Injury:</strong> This research involves minimal risk and no compensation for injury is provided.</li>
+                    </ul>
+
+                    <h4>Benefits:</h4>
+                    <ul>
+                        <li><strong>No Direct Benefits:</strong> You will not receive money or direct benefits.</li>
+                        <li><strong>Broader Impact:</strong> However, your participation provides critical data that could improve education policy for thousands of young Moroccans.</li>
+                    </ul>
+
+                    <p><strong>No Additional Costs:</strong> Participation involves no financial costs beyond the time required to complete surveys.</p>
+                    
+                    <div class="highlight-box">
+                        <p><strong>New Information:</strong> If we discover significant new findings during the study that might affect your willingness to participate, we will inform you promptly.</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="section">
+                <div class="accordion-header">
+                    <h3>Questions?</h3>
+                </div>
+                <div class="accordion-content">
+                    <p><strong>About the study:</strong> Contact the research team at [Insert Email/Phone].</p>
+                    <p><strong>About your rights:</strong> Contact the MIT Committee on the Use of Humans as Experimental Subjects at couhes@mit.edu or 1-617-253-6787.</p>
+                </div>
             </div>
 
             <div class="consent-section">
-                <h3 style="border: none; padding: 0; margin-bottom: 1.5rem; color: #111; font-size: 2rem;">📋 Your Decision</h3>
+                <h3 style="border: none; padding: 0; margin-bottom: 1.5rem; color: #111; font-size: 2rem;">Your Decision</h3>
                 <div style="background: white; padding: 1.5rem; border-radius: 0.5rem; margin-bottom: 2rem;">
-                    <p style="font-size: 1.1rem;">I confirm I have read the information above, I understand that my participation is voluntary, I understand that participation involves an experimental admission procedure, and I agree to participate in this research study.</p>
+                    <p style="font-size: 1.1rem;">I am 18 years or older, I confirm I have read the information above, I understand that my participation is voluntary, I understand that participation involves an experimental admission procedure, and I agree to participate in this research study.</p>
                     <p style="font-weight: 400; font-style: italic; margin-top: 1rem; color: #666;">You are not giving up any legal rights by agreeing to participate in this study.</p>
                 </div>
                 
                 <div class="button-group">
-                    <button class="btn btn-primary" onclick="handleConsent(true)">✓ YES, I WANT TO HELP</button>
-                    <button class="btn btn-secondary" onclick="handleConsent(false)">✗ NO THANKS</button>
+                    <button class="btn btn-primary" onclick="handleConsent(true)">YES, I WANT TO HELP</button>
+                    <button class="btn btn-secondary" onclick="handleConsent(false)">NO THANKS</button>
                 </div>
             </div>
         </div>
@@ -400,6 +482,26 @@
     </div>
 
     <script>
+        // Accordion functionality
+        document.addEventListener('DOMContentLoaded', function() {
+            const headers = document.querySelectorAll('.accordion-header');
+            
+            headers.forEach(header => {
+                header.addEventListener('click', function() {
+                    const section = this.parentElement;
+                    
+                    // Toggle active class
+                    if (section.classList.contains('active')) {
+                        section.classList.remove('active');
+                    } else {
+                        // Optional: Close other sections when one is opened (uncomment next line to enable)
+                        // document.querySelectorAll('.section').forEach(s => s.classList.remove('active'));
+                        section.classList.add('active');
+                    }
+                });
+            });
+        });
+
         function handleConsent(agreed) {
             if (agreed) {
                 alert('Thank you for agreeing to participate in this research study. You will be redirected to the next steps.');
